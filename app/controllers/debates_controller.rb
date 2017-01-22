@@ -1,11 +1,11 @@
 class DebatesController < ApplicationController
-  before_action :valid_topic, only: [:new, :show, :edit, :index, :create]
+  before_action :valid_topic
   before_action :set_debate, only: [:show, :edit, :update, :destroy]
 
   # GET /debates
   # GET /debates.json
   def index
-    @debates = Debate.all
+    @debates = Debate.all(@topic.id)
   end
 
   # GET /debates/1
@@ -42,13 +42,13 @@ class DebatesController < ApplicationController
   # PATCH/PUT /debates/1.json
   def update
     respond_to do |format|
-      if @debate.update(debate_params)
+      #if @debate.update({})
         format.html { redirect_to [@topic, @debate], notice: 'Debate was successfully updated.' }
         format.json { render :show, status: :ok, location: @debate }
-      else
-        format.html { render :edit }
-        format.json { render json: @debate.errors, status: :unprocessable_entity }
-      end
+      #else
+        #format.html { render :edit }
+        #format.json { render json: @debate.errors, status: :unprocessable_entity }
+      #end
     end
   end
 
@@ -65,7 +65,7 @@ class DebatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_debate
-      @debate = Debate.find(params[:id])
+      @debate = Debate.find(params[:id], params[:topic_id])
     end
 
     def valid_topic
@@ -79,7 +79,7 @@ class DebatesController < ApplicationController
 
     def initial_debate_params
       {
-        id: params[:topic_id],
+        owner_id: params[:topic_id],
         status: 'ready'
       }
     end
