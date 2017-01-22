@@ -1,0 +1,9 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @debate.status %>
+</p>
+
+<%= link_to 'Edit', edit_topic_debate_path(@topic, @debate) %> |
+<%= link_to 'Back', topic_debates_path(@topic) %>

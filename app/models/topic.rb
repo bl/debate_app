@@ -11,8 +11,4 @@ class Topic
       description: description
     }
   end
-
-  def initialize(attributes={})
-    super
-  end
 end

@@ -41,11 +41,21 @@ module FirebaseORM
       response = client.delete("#{firebase_class}/#{id}")
     end
 
+    #def has_many(resource)
+      #return unless res_name = attributes.select { |attr| attr.pluralize == resource }
+      #res_klass = res_name.capitalize.constantize
+      #define_method resource do
+        #return "@#{resource}" unless defined?("@#{resource}")
+        #resources = []
+        #send("@#{resource}||=", )
+      #end
+    #end
+
+    private
+
     def firebase_class
       self.name.downcase.pluralize
     end
-
-    private
 
     def parsed_body(body)
       case body
