@@ -1,16 +1,20 @@
 class DebatesController < ApplicationController
-  before_action :valid_topic
+  before_action :valid_topic, only: [:new, :create, :index]
   before_action :set_debate, only: [:show, :edit, :update, :destroy]
 
   # GET /debates
   # GET /debates.json
   def index
-    @debates = Debate.all(@topic.id)
+    @debates = Debate.search(@topic.id)
   end
 
   # GET /debates/1
   # GET /debates/1.json
   def show
+    @presenter = {
+      messages: Message.search(@debate.id),
+      status: status
+    }
   end
 
   # GET /debates/new
@@ -65,7 +69,7 @@ class DebatesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_debate
-      @debate = Debate.find(params[:id], params[:topic_id])
+      @debate = Debate.find(params[:id])
     end
 
     def valid_topic

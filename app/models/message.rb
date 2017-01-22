@@ -1,16 +1,16 @@
-class Debate
+class Message
   include ActiveModel::Model
   include FirebaseORM
 
-  attr_accessor :topic, :status
+  attr_accessor :body
 
-  belongs_to :topic
+  belongs_to :debate
 
   def attributes
     {
       id: id,
       owner_id: owner_id,
-      status: status
+      body: body
     }
   end
 end

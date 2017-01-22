@@ -14,9 +14,9 @@
   <tbody>
     <% @debates.each do |debate| %>
       <tr>
-        <td><%= link_to 'Show', topic_debate_path(@topic, debate) %></td>
-        <td><%= link_to 'Edit', edit_topic_debate_path(@topic, debate) %></td>
-        <td><%= link_to 'Destroy', [@topic, debate], method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', debate_path(debate) %></td>
+        <td><%= link_to 'Edit', edit_debate_path(debate) %></td>
+        <td><%= link_to 'Destroy', debate_path(debate), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
